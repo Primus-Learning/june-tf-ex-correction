@@ -7,8 +7,8 @@ resource "aws_s3_bucket" "scripts_buckets" {
 }
 
 resource "aws_s3_bucket_object" "object" {
-  bucket = aws_s3_bucket.scripts_buckets.id
+  bucket   = aws_s3_bucket.scripts_buckets.id
   for_each = fileset("${path.module}", "**/*.sh")
-  key    = "${each.value}"
-  source = "${path.module}/${each.value}"
+  key      = each.value
+  source   = "${path.module}/${each.value}"
 }
